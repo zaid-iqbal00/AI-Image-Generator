@@ -1,0 +1,28 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+venv311/
+
+# ComfyUI model weights and outputs
+*.ckpt
+*.safetensors
+models/
+output/
+
+# Logs and temp
+*.log
+temp/
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Environment files
+.env
