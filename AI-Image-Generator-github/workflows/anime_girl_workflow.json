@@ -1,0 +1,372 @@
+{
+  "id": "9e1e0869-f04e-42ae-86c5-b3c6fd0be9fc",
+  "revision": 0,
+  "last_node_id": 8,
+  "last_link_id": 16,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "CLIPTextEncode",
+      "pos": [
+        303.0459289550781,
+        379.20379638671875
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "ugly, blurry, low quality, extra limbs, distorted face\n"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "KSampler",
+      "pos": [
+        388.0286560058594,
+        49.0997428894043
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 12
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        707504612233684,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        112.76912689208984,
+        -81.92276000976562
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            8,
+            16
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "anythingv5nijimix_25BEST.safetensors"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "VAEDecode",
+      "pos": [
+        -55.042335510253906,
+        -76.42496490478516
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -137.30715942382812,
+        382.83612060546875
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "a futuristic anime girl wearing headphones, vibrant lighting\n"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "EmptyLatentImage",
+      "pos": [
+        412.8584289550781,
+        -101.9527359008789
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 6,
+      "type": "SaveImage",
+      "pos": [
+        -58.790740966796875,
+        56.400264739990234
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 14
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    }
+  ],
+  "links": [
+    [
+      7,
+      1,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      1,
+      1,
+      2,
+      0,
+      "CLIP"
+    ],
+    [
+      9,
+      1,
+      2,
+      5,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      3,
+      0,
+      4,
+      3,
+      "LATENT"
+    ],
+    [
+      12,
+      2,
+      0,
+      4,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      4,
+      0,
+      5,
+      0,
+      "LATENT"
+    ],
+    [
+      14,
+      5,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      15,
+      8,
+      0,
+      4,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      1,
+      1,
+      8,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650707,
+      "offset": [
+        146.43978062578356,
+        115.89625026010378
+      ]
+    },
+    "frontendVersion": "1.21.7"
+  },
+  "version": 0.4
+}
